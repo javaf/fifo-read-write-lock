@@ -1,8 +1,9 @@
 import java.util.concurrent.locks.*;
 
-// Simple Read-write Lock uses a counter and a
+// FIFO Read-write Lock blocks any new readers once a writer requests, thus preventing writer lock-out due to continual stream of readers.
+// FIFO Read-write Lock uses a counter and a
 // boolean flag to keep track of multiple readers
-// and a writer, but does not prioritize writers.
+// and waiting writer, but does not prioritize writers.
 // A common lock is used to ensure internal
 // updates happen atomically and a common
 // condition is used for indicating either "no
@@ -102,9 +103,9 @@ class FifoReadWriteLock implements ReadWriteLock {
     public void lock() {
       lock.lock(); // 1
       try {
-        while (writer || readers > 0) // 2
-          condition.await();          // 2
-        writer = true; // 3
+        while (writer) condition.await();
+        writer = true;
+        while (readers > 0) condition.await(); // 2
       }
       catch (InterruptedException e) {}
       finally { lock.unlock(); } // 4

@@ -105,7 +105,7 @@ class Main {
   }
 
   public static void main(String[] args) {
-    lock = new SimpleReadWriteLock();
+    lock = new FifoReadWriteLock();
     sharedData = new double[SD];
     testThreads(false);
     sharedData = new double[SD];
