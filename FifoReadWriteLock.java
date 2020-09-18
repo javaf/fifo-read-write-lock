@@ -32,7 +32,7 @@ import java.util.concurrent.locks.*;
 // type of lock is generally only suitable for
 // educational purposes.
 
-class SimpleReadWriteLock implements ReadWriteLock {
+class FifoReadWriteLock implements ReadWriteLock {
   Lock lock;
   Condition condition;
   Lock readLock, writeLock;
@@ -43,7 +43,7 @@ class SimpleReadWriteLock implements ReadWriteLock {
   // readers: number of readers accessing
   // writer: indicates if writer is accessing
 
-  public SimpleReadWriteLock() {
+  public FifoReadWriteLock() {
     lock = new ReentrantLock();
     condition = lock.newCondition();
     readLock = new ReadLock();
