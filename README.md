@@ -36,6 +36,11 @@ number of writers. Thus, this read-write lock is
 suitable when there are a small number of
 writers.
 
+> **Course**: [Concurrent Data Structures], Monsoon 2020\
+> **Taught by**: Prof. Govindarajulu Regeti
+
+[Concurrent Data Structures]: https://github.com/iiithf/concurrent-data-structures
+
 ```java
 readLock().lock():
 1. Acquire common lock.
